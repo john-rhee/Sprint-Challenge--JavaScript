@@ -13,29 +13,49 @@ const tyrannosaurus = {
   diet: "carnivorous",
   weight: "7000kg",
   length: "12m",
-  period: "Late Cretaceous"
+  period: "Late Cretaceous",
+  roar: function(){
+    return "RAWERSRARARWERSARARARRRR!"
+  }
 }
+
 // stegosaurus, herbivorous, 2000kg, 9m, Late Jurassic
 
+const stegosaurus = {
+  name: "stegosaurus",
+  diet: "herbivorous",
+  weight: "2000kg",
+  length: "9m",
+  period: "Late Jurassic"
+}
+
 // velociraptor, carnivorous, 15kg, 1.8m, Late Cretaceous
+
+const velociraptor = {
+  name: "velociraptor",
+  diet: "carnivorous",
+  weight: "15kg",
+  length: "1.8m",
+  period: "Late Cretaceous"
+}
 
 // Using your dinosaur objects, log answers to these questions:
 
 // How much did tyrannosaurus weigh?
-console.log();
+console.log(tyrannosaurus.weight);
 
 // What was the diet of a velociraptor?
-console.log();
+console.log(velociraptor.diet);
 
 // How long was a stegosaurus?
-console.log();
+console.log(stegosaurus.length);
 
 // What time period did tyrannosaurus live in?
-console.log();
+console.log(tyrannosaurus.period);
 
 
 // Create a new roar method for the tyrannosaurus.  When called, return "RAWERSRARARWERSARARARRRR!" Log the result.
-console.log();
+console.log(tyrannosaurus.roar());
 
 
 // ==== Arrays ====
@@ -59,7 +79,15 @@ const graduates = [
 
 Once you have the new array created, sort the universities alphabetically and log the result. */
 const universities = [];
+let universitiesSorted = [];
+
+for (let i=0; i<graduates.length; i++){
+  universities.push(graduates[i].university)
+}
+
+universitiesSorted = universities.sort();
 console.log(universities);
+console.log(universitiesSorted);
 
 /* Request 2: Create a new array called contactInfo that contains both first name and email of each student. This will be an array of strings.
 
@@ -68,10 +96,20 @@ The resulting contact information strings should have a space between the first 
 
 Log the result of your new array. */
 const contactInfo = [];
+
+for (let i=0; i<graduates.length; i++){
+  contactInfo.push(`${graduates[i].first_name} ${graduates[i].email}` )
+}
+
 console.log(contactInfo);
 
 /* Request 3: Find out how many universities have the string "Uni" included in their name. Create a new array called unisWithUni that contains them all. This will be an array of objects. Log the result. */
 const unisWithUni = [];
+
+for (let i=0; i<graduates.length; i++){
+  if (graduates[i].university.includes("Uni")) {unisWithUni.push(graduates[i]); }
+}  
+
 console.log(unisWithUni);
 
 
@@ -98,15 +136,27 @@ The zoos want to display both the scientific name and the animal name in front o
 
 */
 const displayNames = [];
+
+zooAnimals.forEach(function(item) {
+  displayNames.push(`Name: ${item.animal_name}, Scientific: ${item.scientific_name}`);
+  }
+);
+
 console.log(displayNames);
 
 /* Request 2: .map()
 
-The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the resut.
+The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the result.
 
 */
 
 const lowCaseAnimalNames = [];
+
+zooAnimals.map(function(item) {
+  lowCaseAnimalNames.push(`${item.animal_name}`.toLowerCase())
+ }
+);
+
 console.log(lowCaseAnimalNames);
 
 /* Request 3: .filter() 
@@ -115,6 +165,13 @@ The zoos are concerned about animals with a lower population count. Using filter
 
 */
 const lowPopulationAnimals = [];
+
+const lowPop = zooAnimals.filter(function(item) {
+  return item.population < 5;
+  }
+);
+
+lowPopulationAnimals.push(lowPop);
 console.log(lowPopulationAnimals);
 
 /* Request 4: .reduce() 
@@ -122,7 +179,12 @@ console.log(lowPopulationAnimals);
 The zoos need to know their total animal population across the United States. Find the total population from all the zoos using the .reduce() method. Remember the reduce method takes two arguments: a callback (which itself takes two args), and an initial value for the count.
 
 */
-const populationTotal = 0;
+let populationTotal = 0;
+
+populationTotal = zooAnimals.reduce(function(accumulator, item) {
+  return accumulator + item.population;
+  }, 0);
+
 console.log(populationTotal);
 
 
